@@ -1,0 +1,36 @@
+%1
+
+%1.a
+declare
+A=2*2*2*2*2*2*2*2*2*2
+B=A*A*A*A*A
+C=B*B
+{Browse B}
+
+%1.b
+%Não é possível, pois para calcular um fatorial é encessário mapear todos os valores a serem multipĺicados, algo impossível sem o uso de uma função
+
+%2
+
+declare
+fun {Binomial n k}
+   if k == 0 orelse k == n then
+      1
+   else
+      Numerador = {For I in 0..(k-1) do (n - I) end}
+      Denominador = {For J in 1..k do J end}
+      Numerador div Denominador
+   end
+end
+
+{Browse {Binomial 7 3}}
+declare
+fun {Fact N}
+   if N==0 then 1 else N*{Fact N-1} end
+end
+
+
+
+
+
+
