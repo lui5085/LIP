@@ -12,24 +12,71 @@ C=B*B
 
 %2
 
-declare
-fun {Binomial n k}
-   if k == 0 orelse k == n then
-      1
-   else
-      Numerador = {For I in 0..(k-1) do (n - I) end}
-      Denominador = {For J in 1..k do J end}
-      Numerador div Denominador
+declare Perm Comb
+fun {Perm N K}
+   if K==0 then 1
+   else N*{Perm N-1 K-1} end
+end
+
+fun {Comb N K}
+   if K==0 then 1
+   else {Perm N K} div {Perm K K} end      
+end
+{Browse {Comb 5 3}}
+
+
+declare FastComb
+fun {FastComb N K}
+   if 2*K =< N then {Comb N K}
+   else {Comb N N-K} end
+end
+
+{Browse {FastComb 4 2}}
+
+%5
+
+declare SomaLista
+fun {SomaLista L}
+   case L of X|L1 then X+{SomaLista L1}
+   else 0 end
+end
+
+declare Int
+fun lazy {Ints N}
+   N|{Int N+1}
+end
+
+%6
+
+declare Adiciona Subtrai Multiplica Mull
+fun {Adicona X Y}
+   X+Y
+end
+fun {Subtrai X Y}
+   X-Y
+end
+fun {Multiplica X Y}
+   X*Y
+end
+fun {Multiply X Y}
+   (X+1)*(Y+1)
+end
+
+
+%7
+local Y in
+   X=23
+   local X in
+      X=44
    end
+   {Browse X}
 end
 
-{Browse {Binomial 7 3}}
-declare
-fun {Fact N}
-   if N==0 then 1 else N*{Fact N-1} end
+local X in
+   X={NewCell 23}
+   X:=44
+   {Browse @X}
 end
-
-
 
 
 
